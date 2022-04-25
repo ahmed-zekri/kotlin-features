@@ -1,30 +1,15 @@
 import Height.Companion.toMeterHeight
 import Width.Companion.toMeterWidth
-import java.lang.invoke.MethodHandles.loop
 
-fun main(args: Array<String>) {
+fun main() {
     val rect = Rect(5.toMeterWidth {
-
+        Width(it * 1000)
     }, 10.toMeterHeight())
     rect.print()
-    println(rect.height * 20)
-}
-
-val a by ""
-
-private operator fun String.getValue(nothing: Nothing?, property: KProperty<*>): Any {
 
 }
 
-class Rect {
-    lateinit var height: String
-    lateinit var width: Array<Char>
-
-    constructor(a: Width, b: Height) {
-        println("dfd")
-        this.width = a
-        this.height = "cdscsd"
-    }
+class Rect(private var width: Width, private var height: Height) {
 
 
     fun print() {
@@ -45,7 +30,8 @@ value class Width(private val width: Int) {
 
 
     companion object {
-        fun Int.toMeterWidth(fn: (String) -> Unit) = Width(this * 1000)
+
+        inline fun Int.toMeterWidth(callback: (Int) -> Width) = callback(this)
 
 
     }
@@ -59,29 +45,25 @@ value class Height(private val height: Int) {
 
     init {
         require(height > 0) { "Args must be non null" }
-        dff(::ddf)
+        ::inlineFunction.invoke {
+
+
+        }
 
     }
 
-    fun ddf() {
-        loop{}
-        val a= listOf(1,2,5)
-        a.forEach(fun(v:Int){
-            return
 
-        })
-
-    }
     operator fun times(multiplier: Int) = height * multiplier
 
 
     companion object {
+
         fun Int.toMeterHeight() = Height(this * 1000)
 
 
     }
 
-    fun dff(a: () -> Unit) {}
+    private inline fun inlineFunction(callback: () -> Unit) = callback()
 
 
 }
